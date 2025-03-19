@@ -55,10 +55,7 @@ jobs:
             ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
 
       - name: Install Phala Cloud CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y nodejs
-          sudo npm install -g bun
+        run: sudo apt-get update && sudo apt-get install -y nodejs && sudo npm install -g bun
       # Configure Phala Cloud API key
       - name: Configure Phala Cloud
         run: |
@@ -76,4 +73,9 @@ jobs:
           npx phala cvms create \
             -n ${{ env.APP_NAME }} \
             -c api-server/docker-compose.yml \
-            --skip-env
+            --skip-env \
+            --vcpu 1 \
+            --memory 1024 \
+            --disk-size 20 \
+            --teepod-id 3 \
+            --image dstack-0.3.5
