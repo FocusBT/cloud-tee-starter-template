@@ -58,13 +58,13 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y nodejs
-          sudo npm install -g phala
+          sudo npm install -g bun
       # Configure Phala Cloud API key
       - name: Configure Phala Cloud
         run: |
-          phala auth login ${{ env.PHALA_CLOUD_API_KEY }}
+          npx phala auth login ${{ env.PHALA_CLOUD_API_KEY }}
           echo "Verifying Phala Cloud access..."
-          phala cvms ls
+          npx phala cvms ls
 
       - name: Update Docker Compose
         run: |
@@ -73,7 +73,7 @@ jobs:
       - name: Deploy to Phala Cloud
         run: |
           cat api-server/docker-compose.yml
-          phala cvms create \
+          npx phala cvms create \
             -n ${{ env.APP_NAME }} \
             -c api-server/docker-compose.yml \
             --skip-env
