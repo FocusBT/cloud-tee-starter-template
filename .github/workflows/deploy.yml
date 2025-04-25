@@ -65,7 +65,7 @@ jobs:
           phala-api-key: ${{ secrets.PHALA_CLOUD_API_KEY }}
           
           # Optional parameters (with defaults)
-          cvm-name: ${{ env.APP_NAME:0:20 }}
+          cvm-name: ''
           compose-file: './api-server/docker-compose.yml'  # Default: './docker-compose.yml'
           vcpu: '4'                         # Default: '2'
           memory: '4096'                    # Default: '2048'
