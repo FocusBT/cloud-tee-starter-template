@@ -48,7 +48,7 @@ The GitHub Action will automatically:
 1. Build Docker image from Dockerfile, `api-server/Dockerfile` in this example.
 2. Push built docker image to your container registry
 3. Update the docker compose file with the new image
-4. Deploy to Phala TEE Cloud using `teecloud` CLI with the name you set in `APP_NAME` with the updated docker compose file.
+4. Deploy to Phala TEE Cloud using `phala` CLI with the name you set in `APP_NAME` with the updated docker compose file.
 
 ### Trigger Conditions:
 ```yaml
@@ -83,4 +83,4 @@ Common issues:
 ## 🔗 Additional Resources
 
 - [Phala Cloud Official Docs (Draft)](https://phalanetwork.notion.site/Phala-Cloud-User-Guide-1700317e04a18018a98ed9ea39b02670)
-- [TEE Cloud CLI GitHub](https://github.com/Phala-Network/tee-cloud-cli)
+- [Phala Cloud CLI GitHub](https://github.com/Phala-Network/phala-cloud-cli)
