@@ -54,28 +54,24 @@ jobs:
             ${{ env.DOCKER_IMAGE }}:latest
             ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
 
-      - name: Install Phala Cloud CLI
-        run: sudo apt-get update && sudo apt-get install -y nodejs && sudo npm install -g bun
-      # Configure Phala Cloud API key
-      - name: Configure Phala Cloud
-        run: |
-          npx phala auth login ${{ env.PHALA_CLOUD_API_KEY }}
-          echo "Verifying Phala Cloud access..."
-          npx phala cvms ls
-
       - name: Update Docker Compose
         run: |
           sed -i "s|\${DOCKER_IMAGE}|${DOCKER_IMAGE}|g" ./api-server/docker-compose.yml
 
       - name: Deploy to Phala Cloud
-        run: |
-          cat api-server/docker-compose.yml
-          npx phala cvms create \
-            -n ${{ env.APP_NAME }} \
-            -c api-server/docker-compose.yml \
-            --skip-env \
-            --vcpu 1 \
-            --memory 1024 \
-            --disk-size 20 \
-            --teepod-id 3 \
-            --image dstack-0.3.5
+        uses: Leechael/phala-deploy-action@v2
+        with:
+          # Required parameters
+          phala-api-key: ${{ secrets.PHALA_CLOUD_API_KEY }}
+          
+          # Optional parameters (with defaults)
+          cvm-name: ''
+          compose-file: './api-server/docker-compose.yml'  # Default: './docker-compose.yml'
+          vcpu: '4'                         # Default: '2'
+          memory: '4096'                    # Default: '2048'
+          disk-size: '10'                   # Default: '40'
+          envs: |                           # Environment variables in YAML format (will be converted to dotenv)
+            EXAMPLE_ENV_VAR: 'none'
+          app-id: ''                        # App ID of existing CVM to (if updating)
+          node-id: ''                       # Node ID (Teepod ID)
+          base-image: ''                    # Base image to use for the CVM
