@@ -82,5 +82,5 @@ Common issues:
 
 ## 🔗 Additional Resources
 
-- [Phala Cloud Official Docs (Draft)](https://phalanetwork.notion.site/Phala-Cloud-User-Guide-1700317e04a18018a98ed9ea39b02670)
+- [Phala Cloud Official Doc](https://docs.phala.network/phala-cloud/setup-a-ci-cd-pipeline)
 - [Phala Cloud CLI GitHub](https://github.com/Phala-Network/phala-cloud-cli)
